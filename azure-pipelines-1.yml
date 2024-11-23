@@ -9,6 +9,9 @@ trigger:
 pool:
   name: Default
 
+variables:
+  AZP_AGENT_CLEANUP_PSMODULES_IN_POWERSHELL: true
+
 steps:
 - task: NodeTool@0
   inputs:
