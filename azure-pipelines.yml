@@ -1,35 +1,24 @@
+
+ # Node.js with React
+# Build a Node.js project that uses React.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+
 trigger:
 - master
 
 pool:
+  vmImage: ubuntu-latest
   name: Default
 
 variables:
   AZP_AGENT_CLEANUP_PSMODULES_IN_POWERSHELL: true
-
 steps:
 - task: NodeTool@0
   inputs:
     versionSpec: '20.x'
   displayName: 'Install Node.js'
-
-- script: |
-    # Clear any old modules and ensure necessary modules are imported
-    Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Windows\PowerShell\Modules\*" -Recurse -Force -ErrorAction SilentlyContinue
-    try {
-      # Explicitly load the PowerShell Security module
-      Import-Module Microsoft.PowerShell.Security -Force -ErrorAction Stop
-    } catch {
-      Write-Host "Error importing PowerShell.Security module: $_"
-    }
-    
-    # Log Node.js and npm versions
-    node -v
-    npm -v
-    
-    # Log Environment Info
-    echo "Environment Info: $env:COMPUTERNAME"
-  displayName: "Log Node.js Environment"
 
 - script: |
     # Run npm install and build
