@@ -13,12 +13,6 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    echo "Cleanup Modules Variable: $env:AZP_AGENT_CLEANUP_PSMODULES_IN_POWERSHELL"
-    $PSVersionTable
-    pwsh -Command '$PSVersionTable'
-  displayName: 'Verify PowerShell Core'
-
-- script: |
     Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Windows\PowerShell\Modules\*" -Recurse -Force -ErrorAction SilentlyContinue
     Import-Module Microsoft.PowerShell.Security -Force
     node -v
