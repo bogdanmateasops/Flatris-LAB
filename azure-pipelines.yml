@@ -7,14 +7,17 @@
 trigger:
 - master
 
-pool:
-  vmImage: ubuntu-latest
-  name: Default
 steps:
 - task: NodeTool@0
   inputs:
     versionSpec: '20.x'
   displayName: 'Install Node.js'
+
+- script: |
+    node -v
+    npm -v
+    echo "Environment Info: $env:COMPUTERNAME"
+  displayName: "Log Node.js Environment"
 
 - script: |
     npm install
